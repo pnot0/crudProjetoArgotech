@@ -193,7 +193,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     //Abre uma caixa questionando se o usuario deseja sair, se sim fechara o sistema, se não fechara somente a caixa
     private void opcoesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcoesMenuItemActionPerformed
-        int exit = JOptionPane.showConfirmDialog(null, "Você deseja sair?","Atenção",JOptionPane.YES_NO_OPTION);
+        int exit = JOptionPane.showConfirmDialog(null, "Você deseja sair?","Aviso",JOptionPane.YES_NO_OPTION);
         if(exit == 0){
             System.exit(0);
         }
