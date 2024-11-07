@@ -37,12 +37,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         cadastroMenu = new javax.swing.JMenu();
         usuarioMenuItem = new javax.swing.JMenuItem();
+        clienteMenuItem = new javax.swing.JMenuItem();
         relatorioMenu = new javax.swing.JMenu();
         servicosMenuItem = new javax.swing.JMenuItem();
         ajudaMenu = new javax.swing.JMenu();
         sobreMenuItem = new javax.swing.JMenuItem();
         opcoesMenu = new javax.swing.JMenu();
-        opcoesMenuItem = new javax.swing.JMenuItem();
+        sairMenuItem = new javax.swing.JMenuItem();
+        fecharMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Argotech Sistema CRUD");
@@ -86,6 +88,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         cadastroMenu.add(usuarioMenuItem);
 
+        clienteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        clienteMenuItem.setText("Clientes");
+        clienteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clienteMenuItemActionPerformed(evt);
+            }
+        });
+        cadastroMenu.add(clienteMenuItem);
+
         menuBar.add(cadastroMenu);
 
         relatorioMenu.setText("Relatório");
@@ -117,14 +128,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         opcoesMenu.setText("Opções");
 
-        opcoesMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        opcoesMenuItem.setText("Sair");
-        opcoesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        sairMenuItem.setText("Sair");
+        sairMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opcoesMenuItemActionPerformed(evt);
+                sairMenuItemActionPerformed(evt);
             }
         });
-        opcoesMenu.add(opcoesMenuItem);
+        opcoesMenu.add(sairMenuItem);
+
+        fecharMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        fecharMenuItem.setText("Fechar");
+        fecharMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fecharMenuItemActionPerformed(evt);
+            }
+        });
+        opcoesMenu.add(fecharMenuItem);
 
         menuBar.add(opcoesMenu);
 
@@ -192,12 +211,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     //Abre uma caixa questionando se o usuario deseja sair, se sim fechara o sistema, se não fechara somente a caixa
-    private void opcoesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcoesMenuItemActionPerformed
-        int exit = JOptionPane.showConfirmDialog(null, "Você deseja sair?","Aviso",JOptionPane.YES_NO_OPTION);
+    private void fecharMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharMenuItemActionPerformed
+        int exit = JOptionPane.showConfirmDialog(null, "Você deseja fechar?","Aviso",JOptionPane.YES_NO_OPTION);
         if(exit == 0){
             System.exit(0);
         }
-    }//GEN-LAST:event_opcoesMenuItemActionPerformed
+    }//GEN-LAST:event_fecharMenuItemActionPerformed
+
+    private void clienteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteMenuItemActionPerformed
+        TelaCliente telaCliente = new TelaCliente();
+        telaCliente.setVisible(true);
+        jDesktopPane.add(telaCliente);
+    }//GEN-LAST:event_clienteMenuItemActionPerformed
+
+    private void sairMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuItemActionPerformed
+        int logout = JOptionPane.showConfirmDialog(null, "Você deseja sair?","Aviso",JOptionPane.YES_NO_OPTION);
+        if(logout == 0){
+            TelaLogin telaLogin = new TelaLogin();
+            telaLogin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_sairMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,12 +273,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu ajudaMenu;
     private javax.swing.JLabel argotechLogoLabel;
     private javax.swing.JMenu cadastroMenu;
+    private javax.swing.JMenuItem clienteMenuItem;
     private javax.swing.JLabel dataLabel;
+    private javax.swing.JMenuItem fecharMenuItem;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu opcoesMenu;
-    private javax.swing.JMenuItem opcoesMenuItem;
     public static javax.swing.JMenu relatorioMenu;
+    private javax.swing.JMenuItem sairMenuItem;
     private javax.swing.JMenuItem servicosMenuItem;
     private javax.swing.JMenuItem sobreMenuItem;
     public static javax.swing.JLabel usuarioLabel;
