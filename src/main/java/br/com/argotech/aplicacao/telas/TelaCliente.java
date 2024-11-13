@@ -27,7 +27,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     
     public TelaCliente() {
         initComponents();
-        buscarCliente();
+        atualizarCliente();
     }
     
     private void criarCliente(){
@@ -52,6 +52,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             if(adicionar>0){
                 JOptionPane.showMessageDialog(null, "Cliente adicionado com sucesso");
                 limparCampos();
+                atualizarCliente();
             }
             
             
@@ -60,8 +61,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         }
     }
         
-    private void buscarCliente(){
-        String sql = "select * from tbclientes where nomecli like ?";
+    private void atualizarCliente(){
+        String sql = "select idcli as ID, nomecli as Nome, endcli as Endereço, telcli as Fone, emailcli as Email from tbclientes where nomecli like ?";
         try {
             con = ModuloConector.createConnection();
             pst = con.prepareStatement(sql);
@@ -119,6 +120,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             if(alterar>0){
                 JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso");
                 limparCampos();
+                atualizarCliente();
             }
             
             
@@ -142,6 +144,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
                 if(deletar>0){
                     JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso");
+                    atualizarCliente();
                 }
                 
             } catch (Exception e) {
@@ -198,12 +201,12 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         buscaTextField.setToolTipText("");
         buscaTextField.setName(""); // NOI18N
         buscaTextField.setVerifyInputWhenFocusTarget(false);
-        buscaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscaTextFieldActionPerformed(evt);
-            }
-        });
 
+        clienteTable = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex,int colIndex){
+                return false;
+            }
+        };
         clienteTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -232,6 +235,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        clienteTable.setFocusable(false);
         clienteTable.getTableHeader().setReorderingAllowed(false);
         clienteTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -277,7 +281,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         idNumberLabel.setText("ID");
 
         criarClienteButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        criarClienteButton.setText("Criar Cliente");
+        criarClienteButton.setText("Adicionar Cliente");
         criarClienteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 criarClienteButtonActionPerformed(evt);
@@ -348,7 +352,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                                 .addComponent(idNumberLabel))
                             .addComponent(limparButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(criarClienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(criarClienteButton)
                         .addGap(12, 12, 12)
                         .addComponent(alterarClienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -363,7 +367,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(obrigatorioLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(32, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(buscaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -391,22 +395,18 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addComponent(criarClienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deletarClienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(limparButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buscaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaTextFieldActionPerformed
 
     private void clienteTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clienteTableMouseClicked
         setarCampos();
     }//GEN-LAST:event_clienteTableMouseClicked
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        buscarCliente();
+        atualizarCliente();
     }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void criarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarClienteButtonActionPerformed

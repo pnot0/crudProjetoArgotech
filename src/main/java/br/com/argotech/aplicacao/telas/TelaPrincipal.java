@@ -35,11 +35,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         usuarioLabel = new javax.swing.JLabel();
         dataLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
-        cadastroMenu = new javax.swing.JMenu();
+        registroMenu = new javax.swing.JMenu();
         usuarioMenuItem = new javax.swing.JMenuItem();
         clienteMenuItem = new javax.swing.JMenuItem();
+        estoqueMenuItem = new javax.swing.JMenuItem();
+        pcMenuItem = new javax.swing.JMenuItem();
         relatorioMenu = new javax.swing.JMenu();
-        servicosMenuItem = new javax.swing.JMenuItem();
+        vendasMenuItem = new javax.swing.JMenuItem();
         ajudaMenu = new javax.swing.JMenu();
         sobreMenuItem = new javax.swing.JMenuItem();
         opcoesMenu = new javax.swing.JMenu();
@@ -61,7 +63,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPane.setLayout(jDesktopPaneLayout);
         jDesktopPaneLayout.setHorizontalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 840, Short.MAX_VALUE)
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,7 +78,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         dataLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         dataLabel.setText("Data");
 
-        cadastroMenu.setText("Cadastro");
+        registroMenu.setText("Registro");
 
         usuarioMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
         usuarioMenuItem.setText("Usuarios");
@@ -86,7 +88,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 usuarioMenuItemActionPerformed(evt);
             }
         });
-        cadastroMenu.add(usuarioMenuItem);
+        registroMenu.add(usuarioMenuItem);
 
         clienteMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_DOWN_MASK));
         clienteMenuItem.setText("Clientes");
@@ -95,21 +97,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 clienteMenuItemActionPerformed(evt);
             }
         });
-        cadastroMenu.add(clienteMenuItem);
+        registroMenu.add(clienteMenuItem);
 
-        menuBar.add(cadastroMenu);
+        estoqueMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        estoqueMenuItem.setText("Estoque");
+        estoqueMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estoqueMenuItemActionPerformed(evt);
+            }
+        });
+        registroMenu.add(estoqueMenuItem);
+
+        pcMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        pcMenuItem.setText("Computadores");
+        pcMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pcMenuItemActionPerformed(evt);
+            }
+        });
+        registroMenu.add(pcMenuItem);
+
+        menuBar.add(registroMenu);
 
         relatorioMenu.setText("Relatório");
         relatorioMenu.setEnabled(false);
 
-        servicosMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        servicosMenuItem.setText("Serviços");
-        servicosMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                servicosMenuItemActionPerformed(evt);
-            }
-        });
-        relatorioMenu.add(servicosMenuItem);
+        vendasMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        vendasMenuItem.setText("Vendas");
+        relatorioMenu.add(vendasMenuItem);
 
         menuBar.add(relatorioMenu);
 
@@ -155,18 +170,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(argotechLogoLabel)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dataLabel)
-                            .addComponent(usuarioLabel))
-                        .addContainerGap(247, Short.MAX_VALUE))))
+                    .addComponent(usuarioLabel)
+                    .addComponent(dataLabel)
+                    .addComponent(argotechLogoLabel))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,15 +187,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(dataLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(usuarioLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 406, Short.MAX_VALUE)
                         .addComponent(argotechLogoLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(966, 528));
+        setSize(new java.awt.Dimension(1280, 757));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -194,10 +204,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaUsuario.setVisible(true);
         jDesktopPane.add(telaUsuario);
     }//GEN-LAST:event_usuarioMenuItemActionPerformed
-
-    private void servicosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicosMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_servicosMenuItemActionPerformed
 
     private void sobreMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreMenuItemActionPerformed
         // TODO add your handling code here:
@@ -232,6 +238,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_sairMenuItemActionPerformed
+
+    private void estoqueMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estoqueMenuItemActionPerformed
+        TelaEstoque telaEstoque = new TelaEstoque();
+        telaEstoque.setVisible(true);
+        jDesktopPane.add(telaEstoque);
+    }//GEN-LAST:event_estoqueMenuItemActionPerformed
+
+    private void pcMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pcMenuItemActionPerformed
+        TelaComputadores telaComputadores = new TelaComputadores();
+        telaComputadores.setVisible(true);
+        jDesktopPane.add(telaComputadores);
+    }//GEN-LAST:event_pcMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,18 +290,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ajudaMenu;
     private javax.swing.JLabel argotechLogoLabel;
-    private javax.swing.JMenu cadastroMenu;
     private javax.swing.JMenuItem clienteMenuItem;
     private javax.swing.JLabel dataLabel;
+    private javax.swing.JMenuItem estoqueMenuItem;
     private javax.swing.JMenuItem fecharMenuItem;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu opcoesMenu;
+    private javax.swing.JMenuItem pcMenuItem;
+    private javax.swing.JMenu registroMenu;
     public static javax.swing.JMenu relatorioMenu;
     private javax.swing.JMenuItem sairMenuItem;
-    private javax.swing.JMenuItem servicosMenuItem;
     private javax.swing.JMenuItem sobreMenuItem;
     public static javax.swing.JLabel usuarioLabel;
     public static javax.swing.JMenuItem usuarioMenuItem;
+    private javax.swing.JMenuItem vendasMenuItem;
     // End of variables declaration//GEN-END:variables
 }
