@@ -1,7 +1,17 @@
 /home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/dal/ModuloConector.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/model/CRUD.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/model/Cliente.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/model/Componente.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/model/Computador.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/model/Estoque.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/model/Usuario.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/model/Venda.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/telas/TelaAjuda.java
 /home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/telas/TelaCliente.java
 /home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/telas/TelaComputadores.java
 /home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/telas/TelaEstoque.java
 /home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/telas/TelaLogin.java
 /home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/telas/TelaPrincipal.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/telas/TelaRelatorioVenda.java
 /home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/telas/TelaUsuario.java
+/home/pnot0/NetBeansProjects/prjArgotech/src/main/java/br/com/argotech/aplicacao/telas/TelaVenda.java
