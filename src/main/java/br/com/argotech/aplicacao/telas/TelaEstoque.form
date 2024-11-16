@@ -44,30 +44,30 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="buscaTextField" min="-2" pref="250" max="-2" attributes="0"/>
+                              <Component id="buscaEstoqueTextField" min="-2" pref="250" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="buscarButton" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="buscarEstoqueButton" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="obrigatorioLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="obrigatorioEstoqueLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="nomeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="quantidadeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nomeEstoqueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="quantidadeEstoqueLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="nomeTextField" min="-2" pref="220" max="-2" attributes="0"/>
-                                  <Component id="quantidadeSpinner" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="nomeEstoqueTextField" min="-2" pref="220" max="-2" attributes="0"/>
+                                  <Component id="quantidadeEstoqueSpinner" min="-2" pref="110" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="idLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="idEstoqueLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="idNumberLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="idEstoqueNumberLabel" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="categoriaComboBox" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="categoriaEstoqueComboBox" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -84,13 +84,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="obrigatorioLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="obrigatorioEstoqueLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="buscarButton" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="buscaTextField" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="buscarEstoqueButton" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="buscaEstoqueTextField" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -98,16 +98,16 @@
               <Component id="JScrollPane" min="-2" pref="125" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nomeTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="idNumberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nomeEstoqueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nomeEstoqueTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="idEstoqueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="idEstoqueNumberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="quantidadeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="categoriaComboBox" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="quantidadeSpinner" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="quantidadeEstoqueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="categoriaEstoqueComboBox" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="quantidadeEstoqueSpinner" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -122,7 +122,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="idLabel">
+    <Component class="javax.swing.JLabel" name="idEstoqueLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
@@ -130,25 +130,28 @@
         <Property name="text" type="java.lang.String" value="ID:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="buscarButton">
+    <Component class="javax.swing.JButton" name="buscarEstoqueButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/refresh.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarEstoqueButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="idNumberLabel">
+    <Component class="javax.swing.JLabel" name="idEstoqueNumberLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="ID"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="obrigatorioLabel">
+    <Component class="javax.swing.JLabel" name="obrigatorioEstoqueLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="18" style="0"/>
@@ -167,12 +170,15 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="criarEstoqueButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="nomeTextField">
+    <Component class="javax.swing.JTextField" name="nomeEstoqueTextField">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="14" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="alterarEstoqueButton">
       <Properties>
@@ -204,7 +210,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limparButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="nomeLabel">
+    <Component class="javax.swing.JLabel" name="nomeEstoqueLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
@@ -212,7 +218,7 @@
         <Property name="text" type="java.lang.String" value="Nome estoque*"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="quantidadeLabel">
+    <Component class="javax.swing.JLabel" name="quantidadeEstoqueLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
@@ -220,12 +226,15 @@
         <Property name="text" type="java.lang.String" value="Quantidade*"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="buscaTextField">
+    <Component class="javax.swing.JTextField" name="buscaEstoqueTextField">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
         <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="JScrollPane">
       <AuxValues>
@@ -234,7 +243,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="estoqueTable">
+        <Component class="javax.swing.JTable" name="estoqueEstoqueTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="6">
@@ -274,15 +283,16 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="estoqueTableMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="estoqueEstoqueTableMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="estoqueTable = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex,int colIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="estoqueEstoqueTable = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex,int colIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="categoriaComboBox">
+    <Component class="javax.swing.JComboBox" name="categoriaEstoqueComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="11">
@@ -302,9 +312,13 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JSpinner" name="quantidadeSpinner">
+    <Component class="javax.swing.JSpinner" name="quantidadeEstoqueSpinner">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

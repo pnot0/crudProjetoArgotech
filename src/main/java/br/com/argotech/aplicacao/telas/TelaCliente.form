@@ -35,41 +35,41 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="foneLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="foneClienteLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="foneTextField" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="foneClienteTextField" min="-2" pref="160" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="nomeLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="nomeClienteLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="nomeTextField" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="nomeClienteTextField" min="-2" pref="160" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="enderecoLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="enderecoClienteLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="emailClienteLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="enderecoTextField" pref="200" max="32767" attributes="0"/>
-                          <Component id="emailTextField" max="32767" attributes="0"/>
+                          <Component id="enderecoClienteTextField" pref="200" max="32767" attributes="0"/>
+                          <Component id="emailClienteTextField" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="buscaTextField" min="-2" pref="250" max="-2" attributes="0"/>
+                      <Component id="buscaClienteTextField" min="-2" pref="250" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="buscarButton" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="buscarClienteButton" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="obrigatorioLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="obrigatorioClienteLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="76" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="idLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="idClienteClienteLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="idNumberLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="idClienteClienteNumberLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="limparButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -91,13 +91,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="obrigatorioLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="obrigatorioClienteLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="buscarButton" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="buscaTextField" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="buscarClienteButton" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="buscaClienteTextField" min="-2" pref="42" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -105,22 +105,22 @@
               <Component id="JScrollPane" min="-2" pref="125" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nomeTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="enderecoTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="enderecoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nomeClienteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nomeClienteTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="enderecoClienteTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="enderecoClienteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="foneTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="foneLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="emailClienteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="emailClienteTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="foneClienteTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="foneClienteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="idNumberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="idClienteClienteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="idClienteClienteNumberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -135,12 +135,15 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="buscaTextField">
+    <Component class="javax.swing.JTextField" name="buscaClienteTextField">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
         <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="JScrollPane">
       <AuxValues>
@@ -149,7 +152,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="clienteTable">
+        <Component class="javax.swing.JTable" name="clienteClienteTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="6">
@@ -195,25 +198,26 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clienteTableMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clienteClienteTableMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="clienteTable = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex,int colIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="clienteClienteTable = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex,int colIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="buscarButton">
+    <Component class="javax.swing.JButton" name="buscarClienteButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/refresh.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarClienteButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="obrigatorioLabel">
+    <Component class="javax.swing.JLabel" name="obrigatorioClienteLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="18" style="0"/>
@@ -221,35 +225,47 @@
         <Property name="text" type="java.lang.String" value="Campos obrigat&#xf3;rios: *"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nomeTextField">
+    <Component class="javax.swing.JTextField" name="nomeClienteTextField">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="14" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="enderecoTextField">
+    <Component class="javax.swing.JTextField" name="enderecoClienteTextField">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="14" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="foneTextField">
+    <Component class="javax.swing.JTextField" name="foneClienteTextField">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="14" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="emailTextField">
+    <Component class="javax.swing.JTextField" name="emailClienteTextField">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="14" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="nomeLabel">
+    <Component class="javax.swing.JLabel" name="nomeClienteLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
@@ -257,7 +273,7 @@
         <Property name="text" type="java.lang.String" value="Nome*"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="enderecoLabel">
+    <Component class="javax.swing.JLabel" name="enderecoClienteLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
@@ -265,7 +281,7 @@
         <Property name="text" type="java.lang.String" value="Endere&#xe7;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="foneLabel">
+    <Component class="javax.swing.JLabel" name="foneClienteLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
@@ -273,7 +289,7 @@
         <Property name="text" type="java.lang.String" value="Fone*"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="emailLabel">
+    <Component class="javax.swing.JLabel" name="emailClienteLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
@@ -281,7 +297,7 @@
         <Property name="text" type="java.lang.String" value="Email"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="idLabel">
+    <Component class="javax.swing.JLabel" name="idClienteClienteLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
@@ -289,13 +305,16 @@
         <Property name="text" type="java.lang.String" value="ID:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="idNumberLabel">
+    <Component class="javax.swing.JLabel" name="idClienteClienteNumberLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Inter" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="ID"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="criarClienteButton">
       <Properties>

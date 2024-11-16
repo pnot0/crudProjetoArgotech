@@ -1,19 +1,33 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * The MIT License
+ *
+ * Copyright 2024 pnot0.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package br.com.argotech.aplicacao.telas;
 
-import br.com.argotech.aplicacao.dal.ModuloConector;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
+import br.com.argotech.aplicacao.model.Usuario;
 
 /**
- *
- * @author pnot0
+ * @author DiogoNucci
+ * @version 1.0
  */
 public class TelaUsuario extends javax.swing.JInternalFrame {
 
@@ -21,144 +35,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
      * Creates new form TelaUsuario
      */
     
-    Connection con = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
+    Usuario usuario = new Usuario();
     
     public TelaUsuario() {
         initComponents();
-        atualizarUsuario();
-    }
-    
-    private void criarUsuario(){
-        String sql = "insert into tbusuarios(usuario,fone,login,senha,acesso) values(?,?,?,?,?)";
-        try {
-            con = ModuloConector.createConnection();
-            pst = con.prepareStatement(sql);
-            
-            //Pega todos os parametros inseridos pelo usuario
-            pst.setString(1, usuarioTextField.getText());
-            pst.setString(2, foneTextField.getText());
-            pst.setString(3, loginTextField.getText());
-            pst.setString(4, senhaTextField.getText());
-            pst.setString(5, perfilComboBox.getSelectedItem().toString());
-            
-            //Checa se campos obritarios foram preenchidos
-            if(usuarioTextField.getText().isEmpty() || loginTextField.getText().isEmpty() || senhaTextField.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios");
-            }
-            
-            int adicionar = pst.executeUpdate();
-            //Checa se é póssivel adicionar o usuario e retorna a confirmação para o usuario
-            if(adicionar>0){
-                JOptionPane.showMessageDialog(null, "Usuario adicionado com sucesso");
-                limparCampos();
-                atualizarUsuario();
-            }
-            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-        
-    private void atualizarUsuario(){
-        String sql = "select iduser as ID, usuario as Usuario, fone as Fone, login as Login, senha as Senha, acesso as Perfil from tbusuarios where usuario like ?";
-        try {
-            con = ModuloConector.createConnection();
-            pst = con.prepareStatement(sql);
-            
-            pst.setString(1, buscaTextField.getText() + "%");
-            rs = pst.executeQuery();
-            
-            usuarioTable.setModel(DbUtils.resultSetToTableModel(rs));
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
-    private void setarCampos(){
-        int setar = usuarioTable.getSelectedRow();
-        
-        idNumberLabel.setText(usuarioTable.getModel().getValueAt(setar, 0).toString());
-        usuarioTextField.setText(usuarioTable.getModel().getValueAt(setar, 1).toString());
-        
-        if(usuarioTable.getModel().getValueAt(setar, 2).toString() == null){
-            foneTextField.setText(usuarioTable.getModel().getValueAt(setar, 2).toString());
-        }else{
-            foneTextField.setText("");
-        }
-        
-        loginTextField.setText(usuarioTable.getModel().getValueAt(setar, 3).toString());
-        senhaTextField.setText(usuarioTable.getModel().getValueAt(setar, 4).toString());
-        perfilComboBox.setSelectedItem(usuarioTable.getModel().getValueAt(setar, 5).toString());
-    }
-
-    private void alterarUsuario(){
-        String sql = "update tbusuarios set usuario=?,fone=?,login=?,senha=?,acesso=? where iduser=?";
-        try {
-            con = ModuloConector.createConnection();
-            pst = con.prepareStatement(sql);
-            
-            pst.setString(1, usuarioTextField.getText());
-            pst.setString(2, foneTextField.getText());
-            pst.setString(3, loginTextField.getText());
-            pst.setString(4, senhaTextField.getText());
-            pst.setString(5, perfilComboBox.getSelectedItem().toString());
-            
-            pst.setString(6, idNumberLabel.getText());
-            
-            if(usuarioTextField.getText().isEmpty() || loginTextField.getText().isEmpty() || senhaTextField.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios");
-            }
-            
-            int alterar = pst.executeUpdate();
-
-            if(alterar>0){
-                JOptionPane.showMessageDialog(null, "Usuario alterado com sucesso");
-                limparCampos();
-                atualizarUsuario();
-            }
-            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
-    private void deletarUsuario(){
-        
-        int confirma = JOptionPane.showConfirmDialog(null, "Certeza que deseja deletar este usuario?", "Aviso", JOptionPane.YES_NO_OPTION);
-        if(confirma==JOptionPane.YES_OPTION){           
-            String sql = "delete from tbusuarios where iduser=?";
-            try {
-                con = ModuloConector.createConnection();
-                pst = con.prepareStatement(sql);
-                
-                pst.setString(1, idNumberLabel.getText());
-                
-                int deletar = pst.executeUpdate();
-
-                if(deletar>0){
-                    JOptionPane.showMessageDialog(null, "Usuario deletado com sucesso");
-                    atualizarUsuario();
-                }
-                
-            } catch (Exception e) {
-
-            }
-        }
-    }
-    
-    private void limparCampos(){
-        usuarioTable.clearSelection();
-        
-        idNumberLabel.setText("ID");
-        usuarioTextField.setText(null);
-        foneTextField.setText(null);
-        loginTextField.setText(null);
-        senhaTextField.setText(null);
+        usuario.atualizar();
     }
     
     /**
@@ -170,26 +51,26 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        usuarioTextField = new javax.swing.JTextField();
-        foneTextField = new javax.swing.JTextField();
-        loginTextField = new javax.swing.JTextField();
-        senhaTextField = new javax.swing.JTextField();
-        usuarioLabel = new javax.swing.JLabel();
-        foneLabel = new javax.swing.JLabel();
-        loginLabel = new javax.swing.JLabel();
-        senhaLabel = new javax.swing.JLabel();
-        perfilLabel = new javax.swing.JLabel();
-        perfilComboBox = new javax.swing.JComboBox<>();
+        usuarioUsuarioTextField = new javax.swing.JTextField();
+        foneUsuarioTextField = new javax.swing.JTextField();
+        loginUsuarioTextField = new javax.swing.JTextField();
+        senhaUsuarioTextField = new javax.swing.JTextField();
+        usuarioUsuarioLabel = new javax.swing.JLabel();
+        foneUsuarioLabel = new javax.swing.JLabel();
+        loginUsuarioLabel = new javax.swing.JLabel();
+        senhaUsuarioLabel = new javax.swing.JLabel();
+        perfilUsuarioLabel = new javax.swing.JLabel();
+        perfilUsuarioComboBox = new javax.swing.JComboBox<>();
         criarUsuarioButton = new javax.swing.JButton();
-        obrigatorioLabel = new javax.swing.JLabel();
+        obrigatorioUsuarioLabel = new javax.swing.JLabel();
         JScrollPane = new javax.swing.JScrollPane();
-        usuarioTable = new javax.swing.JTable();
-        buscaTextField = new javax.swing.JTextField();
-        buscarButton = new javax.swing.JButton();
+        usuarioUsuarioTable = new javax.swing.JTable();
+        buscaUsuarioTextField = new javax.swing.JTextField();
+        buscarUsuarioButton = new javax.swing.JButton();
         alterarUsuarioButton = new javax.swing.JButton();
         deletarUsuarioButton = new javax.swing.JButton();
-        idLabel = new javax.swing.JLabel();
-        idNumberLabel = new javax.swing.JLabel();
+        idUsuarioLabel = new javax.swing.JLabel();
+        idUsuarioNumberLabel = new javax.swing.JLabel();
         limparButton = new javax.swing.JButton();
 
         setClosable(true);
@@ -198,31 +79,31 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setTitle("Usuario");
         setPreferredSize(new java.awt.Dimension(620, 470));
 
-        usuarioTextField.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        usuarioUsuarioTextField.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
 
-        foneTextField.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        foneUsuarioTextField.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
 
-        loginTextField.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        loginUsuarioTextField.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
 
-        senhaTextField.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        senhaUsuarioTextField.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
 
-        usuarioLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        usuarioLabel.setText("Usuario*");
+        usuarioUsuarioLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        usuarioUsuarioLabel.setText("Usuario*");
 
-        foneLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        foneLabel.setText("Fone");
+        foneUsuarioLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        foneUsuarioLabel.setText("Fone");
 
-        loginLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        loginLabel.setText("Login*");
+        loginUsuarioLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        loginUsuarioLabel.setText("Login*");
 
-        senhaLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        senhaLabel.setText("Senha*");
+        senhaUsuarioLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        senhaUsuarioLabel.setText("Senha*");
 
-        perfilLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        perfilLabel.setText("Perfil");
+        perfilUsuarioLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        perfilUsuarioLabel.setText("Perfil");
 
-        perfilComboBox.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
-        perfilComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "usuario" }));
+        perfilUsuarioComboBox.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        perfilUsuarioComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "usuario" }));
 
         criarUsuarioButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         criarUsuarioButton.setText("Criar Usuario");
@@ -232,15 +113,15 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        obrigatorioLabel.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
-        obrigatorioLabel.setText("Campos obrigatórios: *");
+        obrigatorioUsuarioLabel.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        obrigatorioUsuarioLabel.setText("Campos obrigatórios: *");
 
-        usuarioTable = new javax.swing.JTable(){
+        usuarioUsuarioTable = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex,int colIndex){
                 return false;
             }
         };
-        usuarioTable.setModel(new javax.swing.table.DefaultTableModel(
+        usuarioUsuarioTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -268,22 +149,22 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        usuarioTable.getTableHeader().setReorderingAllowed(false);
-        usuarioTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        usuarioUsuarioTable.getTableHeader().setReorderingAllowed(false);
+        usuarioUsuarioTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                usuarioTableMouseClicked(evt);
+                usuarioUsuarioTableMouseClicked(evt);
             }
         });
-        JScrollPane.setViewportView(usuarioTable);
+        JScrollPane.setViewportView(usuarioUsuarioTable);
 
-        buscaTextField.setToolTipText("");
-        buscaTextField.setName(""); // NOI18N
-        buscaTextField.setVerifyInputWhenFocusTarget(false);
+        buscaUsuarioTextField.setToolTipText("");
+        buscaUsuarioTextField.setName(""); // NOI18N
+        buscaUsuarioTextField.setVerifyInputWhenFocusTarget(false);
 
-        buscarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
-        buscarButton.addActionListener(new java.awt.event.ActionListener() {
+        buscarUsuarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
+        buscarUsuarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarButtonActionPerformed(evt);
+                buscarUsuarioButtonActionPerformed(evt);
             }
         });
 
@@ -303,11 +184,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        idLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        idLabel.setText("ID:");
+        idUsuarioLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        idUsuarioLabel.setText("ID:");
 
-        idNumberLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        idNumberLabel.setText("ID");
+        idUsuarioNumberLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        idUsuarioNumberLabel.setText("ID");
 
         limparButton.setText("Limpar");
         limparButton.addActionListener(new java.awt.event.ActionListener() {
@@ -324,42 +205,42 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buscaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buscaUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buscarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(obrigatorioLabel)
+                        .addComponent(obrigatorioUsuarioLabel)
                         .addGap(0, 76, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(perfilLabel)
+                                .addComponent(perfilUsuarioLabel)
                                 .addGap(58, 58, 58)
-                                .addComponent(perfilComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(perfilUsuarioComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(3, 3, 3)
-                                        .addComponent(foneLabel)
+                                        .addComponent(foneUsuarioLabel)
                                         .addGap(58, 58, 58)
-                                        .addComponent(foneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(foneUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(usuarioLabel)
+                                        .addComponent(usuarioUsuarioLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(usuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(usuarioUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(loginLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(senhaLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(loginUsuarioLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(senhaUsuarioLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(idLabel)
+                                        .addComponent(idUsuarioLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(idNumberLabel)))
+                                        .addComponent(idUsuarioNumberLabel)))
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(loginTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                                    .addComponent(senhaTextField)))
+                                    .addComponent(loginUsuarioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                                    .addComponent(senhaUsuarioTextField)))
                             .addComponent(JScrollPane)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(limparButton)
@@ -374,91 +255,91 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(buscaTextField)
-                    .addComponent(obrigatorioLabel)
-                    .addComponent(buscarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buscaUsuarioTextField)
+                    .addComponent(obrigatorioUsuarioLabel)
+                    .addComponent(buscarUsuarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginLabel)
-                    .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usuarioLabel)
-                    .addComponent(usuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginUsuarioLabel)
+                    .addComponent(loginUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usuarioUsuarioLabel)
+                    .addComponent(usuarioUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(senhaLabel)
-                    .addComponent(senhaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(foneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(foneLabel))
+                    .addComponent(senhaUsuarioLabel)
+                    .addComponent(senhaUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(foneUsuarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(foneUsuarioLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(idLabel)
-                        .addComponent(idNumberLabel))
+                        .addComponent(idUsuarioLabel)
+                        .addComponent(idUsuarioNumberLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(perfilComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(perfilLabel)))
+                        .addComponent(perfilUsuarioComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(perfilUsuarioLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(alterarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(criarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deletarUsuarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(limparButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void criarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarUsuarioButtonActionPerformed
-        criarUsuario();
+        usuario.criar();
     }//GEN-LAST:event_criarUsuarioButtonActionPerformed
 
-    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        atualizarUsuario();
-    }//GEN-LAST:event_buscarButtonActionPerformed
+    private void buscarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarUsuarioButtonActionPerformed
+        usuario.atualizar();
+    }//GEN-LAST:event_buscarUsuarioButtonActionPerformed
 
-    private void usuarioTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuarioTableMouseClicked
-        setarCampos();
-    }//GEN-LAST:event_usuarioTableMouseClicked
+    private void usuarioUsuarioTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuarioUsuarioTableMouseClicked
+        usuario.setarCampos();
+    }//GEN-LAST:event_usuarioUsuarioTableMouseClicked
 
     private void alterarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarUsuarioButtonActionPerformed
-        alterarUsuario();
+        usuario.alterar();
     }//GEN-LAST:event_alterarUsuarioButtonActionPerformed
 
     private void deletarUsuarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletarUsuarioButtonActionPerformed
-        deletarUsuario();
+        usuario.deletar();
     }//GEN-LAST:event_deletarUsuarioButtonActionPerformed
 
     private void limparButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparButtonActionPerformed
-        limparCampos();
+        usuario.limparCampos();
     }//GEN-LAST:event_limparButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane JScrollPane;
     private javax.swing.JButton alterarUsuarioButton;
-    private javax.swing.JTextField buscaTextField;
-    private javax.swing.JButton buscarButton;
+    public static javax.swing.JTextField buscaUsuarioTextField;
+    private javax.swing.JButton buscarUsuarioButton;
     private javax.swing.JButton criarUsuarioButton;
     private javax.swing.JButton deletarUsuarioButton;
-    private javax.swing.JLabel foneLabel;
-    private javax.swing.JTextField foneTextField;
-    private javax.swing.JLabel idLabel;
-    private javax.swing.JLabel idNumberLabel;
+    private javax.swing.JLabel foneUsuarioLabel;
+    public static javax.swing.JTextField foneUsuarioTextField;
+    private javax.swing.JLabel idUsuarioLabel;
+    public static javax.swing.JLabel idUsuarioNumberLabel;
     private javax.swing.JButton limparButton;
-    private javax.swing.JLabel loginLabel;
-    private javax.swing.JTextField loginTextField;
-    private javax.swing.JLabel obrigatorioLabel;
-    private javax.swing.JComboBox<String> perfilComboBox;
-    private javax.swing.JLabel perfilLabel;
-    private javax.swing.JLabel senhaLabel;
-    private javax.swing.JTextField senhaTextField;
-    private javax.swing.JLabel usuarioLabel;
-    private javax.swing.JTable usuarioTable;
-    private javax.swing.JTextField usuarioTextField;
+    private javax.swing.JLabel loginUsuarioLabel;
+    public static javax.swing.JTextField loginUsuarioTextField;
+    private javax.swing.JLabel obrigatorioUsuarioLabel;
+    public static javax.swing.JComboBox<String> perfilUsuarioComboBox;
+    private javax.swing.JLabel perfilUsuarioLabel;
+    private javax.swing.JLabel senhaUsuarioLabel;
+    public static javax.swing.JTextField senhaUsuarioTextField;
+    private javax.swing.JLabel usuarioUsuarioLabel;
+    public static javax.swing.JTable usuarioUsuarioTable;
+    public static javax.swing.JTextField usuarioUsuarioTextField;
     // End of variables declaration//GEN-END:variables
 }

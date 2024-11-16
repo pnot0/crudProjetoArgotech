@@ -1,19 +1,35 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * The MIT License
+ *
+ * Copyright 2024 pnot0.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package br.com.argotech.aplicacao.telas;
 
-import br.com.argotech.aplicacao.dal.ModuloConector;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
+import br.com.argotech.aplicacao.model.Estoque;
+
+
 
 /**
- *
- * @author pnot0
+ * @author DiogoNucci
+ * @version 1.0
  */
 public class TelaEstoque extends javax.swing.JInternalFrame {
 
@@ -21,132 +37,11 @@ public class TelaEstoque extends javax.swing.JInternalFrame {
      * Creates new form TelaEstoque
      */
     
-    Connection con = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
+    Estoque estoque = new Estoque();
     
     public TelaEstoque() {
         initComponents();
-        atualizarEstoque();
-    }
-    
-    private void criarEstoque(){
-        String sql = "insert into tbestoque(nomeest,catest,quantest) values(?,?,?)";
-        try {
-            con = ModuloConector.createConnection();
-            pst = con.prepareStatement(sql);
-            
-            //Pega todos os parametros inseridos pelo usuario
-            pst.setString(1, nomeTextField.getText());
-            pst.setString(2, categoriaComboBox.getSelectedItem().toString());
-            pst.setString(3, quantidadeSpinner.getValue().toString());
-            
-            //Checa se campos obritarios foram preenchidos
-            if(nomeTextField.getText().isEmpty() || quantidadeSpinner.getValue().toString().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios");
-            }
-            
-            int adicionar = pst.executeUpdate();
-            //Checa se é póssivel adicionar o usuario e retorna a confirmação para o usuario
-            if(adicionar>0){
-                JOptionPane.showMessageDialog(null, "Estoque adicionado com sucesso");
-                limparCampos();
-                atualizarEstoque();
-            }
-            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-        
-    private void atualizarEstoque(){
-        String sql = "select idest as ID, nomeest as Nome, catest as Categoria, quantest as Quantidade from tbestoque where nomeest like ?";
-        try {
-            con = ModuloConector.createConnection();
-            pst = con.prepareStatement(sql);
-            
-            pst.setString(1, buscaTextField.getText() + "%");
-            rs = pst.executeQuery();
-            
-            estoqueTable.setModel(DbUtils.resultSetToTableModel(rs));
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
-    private void setarCampos(){
-        int setar = estoqueTable.getSelectedRow();
-        
-        idNumberLabel.setText(estoqueTable.getModel().getValueAt(setar, 0).toString());
-        nomeTextField.setText(estoqueTable.getModel().getValueAt(setar, 1).toString());
-        categoriaComboBox.setSelectedItem(estoqueTable.getModel().getValueAt(setar, 2).toString());
-        quantidadeSpinner.setValue(estoqueTable.getModel().getValueAt(setar, 3));
-        
-    }
-
-    private void alterarEstoque(){
-        String sql = "update tbestoque set nomeest=?,catest=?,quantest=? where idest=?";
-        try {
-            con = ModuloConector.createConnection();
-            pst = con.prepareStatement(sql);
-            
-            pst.setString(1, nomeTextField.getText());
-            pst.setString(2, categoriaComboBox.getSelectedItem().toString());
-            pst.setString(3, quantidadeSpinner.getValue().toString());
-            
-            pst.setString(4, idNumberLabel.getText());
-            
-            if(nomeTextField.getText().isEmpty() || quantidadeSpinner.getValue().toString().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios");
-            }
-            
-            int alterar = pst.executeUpdate();
-
-            if(alterar>0){
-                JOptionPane.showMessageDialog(null, "Estoque alterado com sucesso");
-                limparCampos();
-                atualizarEstoque();
-            }
-            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
-    private void deletarEstoque(){
-        
-        int confirma = JOptionPane.showConfirmDialog(null, "Certeza que deseja deletar este estoque?", "Aviso", JOptionPane.YES_NO_OPTION);
-        if(confirma==JOptionPane.YES_OPTION){           
-            String sql = "delete from tbestoque where idest=?";
-            try {
-                con = ModuloConector.createConnection();
-                pst = con.prepareStatement(sql);
-                
-                pst.setString(1, idNumberLabel.getText());
-                
-                int deletar = pst.executeUpdate();
-
-                if(deletar>0){
-                    JOptionPane.showMessageDialog(null, "Estoque deletado com sucesso");
-                    atualizarEstoque();
-                }
-                
-            } catch (Exception e) {
-
-            }
-        }
-    }
-    
-    private void limparCampos(){
-        estoqueTable.clearSelection();
-        
-        idNumberLabel.setText("ID");
-        nomeTextField.setText(null);
-        quantidadeSpinner.setValue(0);
-        categoriaComboBox.setSelectedIndex(0);
+        estoque.atualizar();
     }
 
     /**
@@ -158,22 +53,22 @@ public class TelaEstoque extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        idLabel = new javax.swing.JLabel();
-        buscarButton = new javax.swing.JButton();
-        idNumberLabel = new javax.swing.JLabel();
-        obrigatorioLabel = new javax.swing.JLabel();
+        idEstoqueLabel = new javax.swing.JLabel();
+        buscarEstoqueButton = new javax.swing.JButton();
+        idEstoqueNumberLabel = new javax.swing.JLabel();
+        obrigatorioEstoqueLabel = new javax.swing.JLabel();
         criarEstoqueButton = new javax.swing.JButton();
-        nomeTextField = new javax.swing.JTextField();
+        nomeEstoqueTextField = new javax.swing.JTextField();
         alterarEstoqueButton = new javax.swing.JButton();
         deletarEstoqueButton = new javax.swing.JButton();
         limparButton = new javax.swing.JButton();
-        nomeLabel = new javax.swing.JLabel();
-        quantidadeLabel = new javax.swing.JLabel();
-        buscaTextField = new javax.swing.JTextField();
+        nomeEstoqueLabel = new javax.swing.JLabel();
+        quantidadeEstoqueLabel = new javax.swing.JLabel();
+        buscaEstoqueTextField = new javax.swing.JTextField();
         JScrollPane = new javax.swing.JScrollPane();
-        estoqueTable = new javax.swing.JTable();
-        categoriaComboBox = new javax.swing.JComboBox<>();
-        quantidadeSpinner = new javax.swing.JSpinner();
+        estoqueEstoqueTable = new javax.swing.JTable();
+        categoriaEstoqueComboBox = new javax.swing.JComboBox<>();
+        quantidadeEstoqueSpinner = new javax.swing.JSpinner();
 
         setClosable(true);
         setIconifiable(true);
@@ -181,21 +76,21 @@ public class TelaEstoque extends javax.swing.JInternalFrame {
         setTitle("Estoque");
         setPreferredSize(new java.awt.Dimension(620, 470));
 
-        idLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        idLabel.setText("ID:");
+        idEstoqueLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        idEstoqueLabel.setText("ID:");
 
-        buscarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
-        buscarButton.addActionListener(new java.awt.event.ActionListener() {
+        buscarEstoqueButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
+        buscarEstoqueButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarButtonActionPerformed(evt);
+                buscarEstoqueButtonActionPerformed(evt);
             }
         });
 
-        idNumberLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        idNumberLabel.setText("ID");
+        idEstoqueNumberLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        idEstoqueNumberLabel.setText("ID");
 
-        obrigatorioLabel.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
-        obrigatorioLabel.setText("Campos obrigatórios: *");
+        obrigatorioEstoqueLabel.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        obrigatorioEstoqueLabel.setText("Campos obrigatórios: *");
 
         criarEstoqueButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         criarEstoqueButton.setText("Adicionar Estoque");
@@ -205,7 +100,7 @@ public class TelaEstoque extends javax.swing.JInternalFrame {
             }
         });
 
-        nomeTextField.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        nomeEstoqueTextField.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
 
         alterarEstoqueButton.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         alterarEstoqueButton.setText("Alterar Estoque");
@@ -230,22 +125,22 @@ public class TelaEstoque extends javax.swing.JInternalFrame {
             }
         });
 
-        nomeLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        nomeLabel.setText("Nome estoque*");
+        nomeEstoqueLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        nomeEstoqueLabel.setText("Nome estoque*");
 
-        quantidadeLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        quantidadeLabel.setText("Quantidade*");
+        quantidadeEstoqueLabel.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        quantidadeEstoqueLabel.setText("Quantidade*");
 
-        buscaTextField.setToolTipText("");
-        buscaTextField.setName(""); // NOI18N
-        buscaTextField.setVerifyInputWhenFocusTarget(false);
+        buscaEstoqueTextField.setToolTipText("");
+        buscaEstoqueTextField.setName(""); // NOI18N
+        buscaEstoqueTextField.setVerifyInputWhenFocusTarget(false);
 
-        estoqueTable = new javax.swing.JTable(){
+        estoqueEstoqueTable = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex,int colIndex){
                 return false;
             }
         };
-        estoqueTable.setModel(new javax.swing.table.DefaultTableModel(
+        estoqueEstoqueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -273,16 +168,16 @@ public class TelaEstoque extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        estoqueTable.setFocusable(false);
-        estoqueTable.getTableHeader().setReorderingAllowed(false);
-        estoqueTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        estoqueEstoqueTable.setFocusable(false);
+        estoqueEstoqueTable.getTableHeader().setReorderingAllowed(false);
+        estoqueEstoqueTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                estoqueTableMouseClicked(evt);
+                estoqueEstoqueTableMouseClicked(evt);
             }
         });
-        JScrollPane.setViewportView(estoqueTable);
+        JScrollPane.setViewportView(estoqueEstoqueTable);
 
-        categoriaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CPU/Processador", "Cooler CPU", "Placa mãe", "Memoria RAM", "Placa de vídeo", "Armazenamento", "Fonte", "Cabo", "Cooler Gabinete", "Gabinete", "Outro" }));
+        categoriaEstoqueComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CPU/Processador", "Cooler CPU", "Placa mãe", "Memoria RAM", "Placa de vídeo", "Armazenamento", "Fonte", "Cabo", "Cooler Gabinete", "Gabinete", "Outro" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -303,26 +198,26 @@ public class TelaEstoque extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(buscaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buscaEstoqueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buscarEstoqueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(obrigatorioLabel))
+                                .addComponent(obrigatorioEstoqueLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nomeLabel)
-                                    .addComponent(quantidadeLabel))
+                                    .addComponent(nomeEstoqueLabel)
+                                    .addComponent(quantidadeEstoqueLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(quantidadeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(nomeEstoqueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(quantidadeEstoqueSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(idLabel)
+                                        .addComponent(idEstoqueLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(idNumberLabel))
-                                    .addComponent(categoriaComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(idEstoqueNumberLabel))
+                                    .addComponent(categoriaEstoqueComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -332,25 +227,25 @@ public class TelaEstoque extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(obrigatorioLabel))
+                        .addComponent(obrigatorioEstoqueLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buscaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(buscarEstoqueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buscaEstoqueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeLabel)
-                    .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idLabel)
-                    .addComponent(idNumberLabel))
+                    .addComponent(nomeEstoqueLabel)
+                    .addComponent(nomeEstoqueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idEstoqueLabel)
+                    .addComponent(idEstoqueNumberLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quantidadeLabel)
-                    .addComponent(categoriaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(quantidadeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(quantidadeEstoqueLabel)
+                    .addComponent(categoriaEstoqueComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(quantidadeEstoqueSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(alterarEstoqueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,47 +258,47 @@ public class TelaEstoque extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
-        atualizarEstoque();
-    }//GEN-LAST:event_buscarButtonActionPerformed
+    private void buscarEstoqueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarEstoqueButtonActionPerformed
+        estoque.atualizar();
+    }//GEN-LAST:event_buscarEstoqueButtonActionPerformed
 
     private void criarEstoqueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarEstoqueButtonActionPerformed
-        criarEstoque();
+        estoque.criar();
     }//GEN-LAST:event_criarEstoqueButtonActionPerformed
 
     private void alterarEstoqueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarEstoqueButtonActionPerformed
-        alterarEstoque();
+        estoque.alterar();
     }//GEN-LAST:event_alterarEstoqueButtonActionPerformed
 
     private void deletarEstoqueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletarEstoqueButtonActionPerformed
-        deletarEstoque();
+        estoque.deletar();
     }//GEN-LAST:event_deletarEstoqueButtonActionPerformed
 
     private void limparButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparButtonActionPerformed
-        limparCampos();
+        estoque.limparCampos();
     }//GEN-LAST:event_limparButtonActionPerformed
 
-    private void estoqueTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estoqueTableMouseClicked
-        setarCampos();
-    }//GEN-LAST:event_estoqueTableMouseClicked
+    private void estoqueEstoqueTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estoqueEstoqueTableMouseClicked
+        estoque.setarCampos();
+    }//GEN-LAST:event_estoqueEstoqueTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane JScrollPane;
     private javax.swing.JButton alterarEstoqueButton;
-    private javax.swing.JTextField buscaTextField;
-    private javax.swing.JButton buscarButton;
-    private javax.swing.JComboBox<String> categoriaComboBox;
+    public static javax.swing.JTextField buscaEstoqueTextField;
+    private javax.swing.JButton buscarEstoqueButton;
+    public static javax.swing.JComboBox<String> categoriaEstoqueComboBox;
     private javax.swing.JButton criarEstoqueButton;
     private javax.swing.JButton deletarEstoqueButton;
-    private javax.swing.JTable estoqueTable;
-    private javax.swing.JLabel idLabel;
-    private javax.swing.JLabel idNumberLabel;
+    public static javax.swing.JTable estoqueEstoqueTable;
+    private javax.swing.JLabel idEstoqueLabel;
+    public static javax.swing.JLabel idEstoqueNumberLabel;
     private javax.swing.JButton limparButton;
-    private javax.swing.JLabel nomeLabel;
-    private javax.swing.JTextField nomeTextField;
-    private javax.swing.JLabel obrigatorioLabel;
-    private javax.swing.JLabel quantidadeLabel;
-    private javax.swing.JSpinner quantidadeSpinner;
+    private javax.swing.JLabel nomeEstoqueLabel;
+    public static javax.swing.JTextField nomeEstoqueTextField;
+    private javax.swing.JLabel obrigatorioEstoqueLabel;
+    private javax.swing.JLabel quantidadeEstoqueLabel;
+    public static javax.swing.JSpinner quantidadeEstoqueSpinner;
     // End of variables declaration//GEN-END:variables
 }
