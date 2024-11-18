@@ -35,9 +35,9 @@ import java.sql.DriverManager;
 
 public class ModuloConector {
 
-    private static final String USERNAME = "db_operator";
-    private static final String PASSWORD = "AVNS_xR3MhLBXeV_Bz0nrGir";
-    private static final String DATABASE_URL = "jdbc:mysql://argotechteste-argotech.h.aivencloud.com:14053/argotechteste";
+    private static final String USERNAME = "";
+    private static final String PASSWORD = "";
+    private static final String DATABASE_URL = "";
 /**
  * Tenta uma conexao com o banco, retorna uma exception caso falhe
  */
